@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pola Hidup Ilahi — 12 Tokoh Alkitab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #FDFBF7;
+            --bg-card: #F5F1E7;
+            --primary-green: #5C7A58;
+            --accent-green: #8A9A86;
+            --text-main: #2C352B;
+            --text-light: #526051;
+            --nav-width: 280px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lora', serif;
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Nunito', sans-serif; color: var(--primary-green); }
+
+        /* Header & Progress Bar */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background-color: var(--bg-cream);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .menu-btn {
+            background: none; border: none;
+            font-size: 24px; color: var(--primary-green);
+            cursor: pointer; margin-right: 15px;
+        }
+
+        .header-title { font-size: 1.2rem; font-weight: 700; }
+
+        .progress-container {
+            width: 100%; height: 5px;
+            background-color: #E2DDD0;
+        }
+        .progress-bar {
+            height: 100%; background-color: var(--primary-green);
+            width: 0%; transition: width 0.4s ease;
+        }
+
+        /* Navigation Drawer */
+        .drawer {
+            position: fixed;
+            top: 0; left: calc(-1 * var(--nav-width));
+            width: var(--nav-width); height: 100%;
+            background-color: var(--bg-card);
+            box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            z-index: 1001;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            padding-top: 20px;
+        }
+        .drawer.open { left: 0; }
+
+        .drawer-header {
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid #E2DDD0;
+            margin-bottom: 10px;
+        }
+
+        .drawer-menu { list-style: none; }
+        .drawer-menu li {
+            padding: 12px 20px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-left: 4px solid transparent;
+            color: var(--text-light);
+            transition: all 0.2s;
+            font-size: 0.92rem;
+        }
+        .drawer-menu li:hover, .drawer-menu li.active {
+            background-color: rgba(92, 122, 88, 0.1);
+            border-left: 4px solid var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4); z-index: 1000;
+            display: none; opacity: 0; transition: opacity 0.3s;
+        }
+        .overlay.active { display: block; opacity: 1; }
+
+        /* Main Content Area */
+        .main-wrapper {
+            width: 100%;
+            transition: margin-left 0.3s ease;
+        }
+
+        main {
+            padding: 80px 20px 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            min-height: calc(100vh - 60px);
+        }
+
+        .hero { text-align: center; margin-bottom: 30px; }
+        .hero h1 { font-size: 2rem; margin-bottom: 5px; }
+        .hero .julukan { font-style: italic; color: var(--accent-green); font-size: 1.1rem; }
+
+        .section-card {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--primary-green);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .section-card h2 { font-size: 1.3rem; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;}
+        .section-card h2::before { content: "❖"; font-size: 1rem; color: var(--accent-green); }
+
+        .reading-box {
+            background-color: #E8EFE7;
+            padding: 15px; border-radius: 8px; margin-bottom: 20px;
+            border: 1px dashed var(--primary-green);
+        }
+        .reading-box strong { color: var(--primary-green); font-family: 'Nunito', sans-serif; }
+
+        .question-box {
+            background: rgba(255,255,255,0.6);
+            padding: 15px; border-radius: 8px; margin-bottom: 15px;
+        }
+        .hint { font-size: 0.9rem; color: var(--text-light); font-style: italic; margin-top: 5px; display: block;}
+
+        .memory-verse {
+            text-align: center; font-size: 1.1rem; font-style: italic;
+            padding: 20px; background-color: var(--primary-green); color: #fff;
+            border-radius: 12px; margin-bottom: 25px; font-weight: 600;
+            box-shadow: 0 4px 10px rgba(92, 122, 88, 0.2);
+        }
+
+        .action-step {
+            background-color: #E8EFE7;
+            border-left-color: #3A5A37;
+        }
+
+        .nav-buttons {
+            display: flex; justify-content: space-between; margin-top: 30px;
+        }
+        .btn {
+            background-color: var(--primary-green); color: #fff;
+            border: none; padding: 10px 20px; border-radius: 20px;
+            font-family: 'Nunito', sans-serif; font-weight: 600;
+            cursor: pointer; transition: background 0.2s;
+        }
+        .btn:hover { background-color: var(--text-main); }
+        .btn:disabled { background-color: #ccc; cursor: not-allowed; }
+
+        footer {
+            text-align: center; padding: 20px;
+            background-color: var(--bg-card);
+            font-family: 'Nunito', sans-serif; font-size: 0.9rem; color: var(--text-light);
+            border-top: 1px solid #E2DDD0;
+        }
+
+        /* ============================================
+           TIMELINE & GEOGRAPHY SECTION
+           ============================================ */
+        .timeline-section {
+            background: linear-gradient(135deg, #EDF3EC 0%, #F5F1E7 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #D5E0D3;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .timeline-header h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .timeline-header h2::before {
+            content: "📖";
+            font-size: 1.1rem;
+        }
+
+        .period-badge {
+            background: var(--primary-green);
+            color: #fff;
+            padding: 5px 16px;
+            border-radius: 20px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+
+        .timeline-scroll {
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-green) transparent;
+        }
+
+        .timeline-scroll::-webkit-scrollbar {
+            height: 5px;
+        }
+        .timeline-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 3px;
+        }
+
+        .timeline-track {
+            display: flex;
+            min-width: 700px;
+            position: relative;
+            padding: 8px 0 4px 0;
+        }
+
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            top: 21px;
+            left: 10px;
+            right: 10px;
+            height: 3px;
+            background: linear-gradient(to right, #C5D4C3, #8A9A86, #C5D4C3);
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .tl-node {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tl-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #B8C8B6;
+            border: 3px solid var(--bg-cream);
+            box-shadow: 0 0 0 1.5px #B8C8B6;
+            transition: all 0.3s;
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+
+        .tl-node.active .tl-dot {
+            width: 18px;
+            height: 18px;
+            background: var(--primary-green);
+            box-shadow: 0 0 0 4px rgba(92, 122, 88, 0.25);
+            border-color: #fff;
+        }
+
+        .tl-label {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.62rem;
+            text-align: center;
+            color: var(--text-light);
+            line-height: 1.25;
+            max-width: 82px;
+            min-height: 2.4em;
+        }
+
+        .tl-node.active .tl-label {
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        .tl-date {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.56rem;
+            color: #aaa;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        .tl-node.active .tl-date {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .location-card {
+            background: rgba(255,255,255,0.75);
+            border-radius: 10px;
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid #D5E0D3;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(92, 122, 88, 0.12);
+        }
+
+        .loc-ancient {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            color: var(--primary-green);
+            font-size: 0.88rem;
+            margin-bottom: 2px;
+        }
+
+        .loc-arrow {
+            color: var(--accent-green);
+            font-size: 0.72rem;
+            margin-bottom: 3px;
+        }
+
+        .loc-modern {
+            font-size: 0.78rem;
+            color: var(--text-main);
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+
+        .loc-country {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.68rem;
+            color: #fff;
+            background: var(--accent-green);
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Desktop Layout Responsiveness */
+        @media (min-width: 768px) {
+            .drawer { left: 0; box-shadow: none; border-right: 1px solid #E2DDD0; }
+            .overlay { display: none !important; }
+            .menu-btn { display: none; }
+
+            .main-wrapper {
+                margin-left: var(--nav-width);
+                width: calc(100% - var(--nav-width));
+            }
+
+            main { padding-top: 100px; }
+            header { width: calc(100% - var(--nav-width)); left: var(--nav-width); }
+
+            .timeline-track {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="header-content">
+            <button class="menu-btn" onclick="toggleDrawer()">☰</button>
+            <div class="header-title">Pendalaman Alkitab 12 Tokoh</div>
+        </div>
+    </header>
+
+    <div class="overlay" id="overlay" onclick="toggleDrawer()"></div>
+
+    <nav class="drawer" id="drawer">
+        <div class="drawer-header">
+            <h3>PA TOKOH</h3>
+            <p style="font-size:0.8rem; color:var(--text-light); margin-top:4px;">12 Tokoh Alkitab &amp; Teladannya</p>
+        </div>
+        <ul class="drawer-menu" id="menuList">
+        </ul>
+    </nav>
+
+    <div class="main-wrapper">
+        <main id="mainContent">
+        </main>
+
+        <footer>
+            &copy; Dibuat dan Disiapkan oleh Kukuh Y - Malang 2026.
+        </footer>
+    </div>
+
+    <script>
+        /* ============================================================
+           ERA BIBLIKAL (untuk timeline visual)
+           ============================================================ */
+        const ERAS = [
+            { label: "Patriarkh",        date: "±2000 SM" },
+            { label: "Eksodus &<br>Penaklukan", date: "±1445 SM" },
+            { label: "Hakim-hakim",      date: "±1200 SM" },
+            { label: "Kerajaan<br>Bersatu", date: "±1000 SM" },
+            { label: "Kerajaan<br>Terpecah", date: "±870 SM" },
+            { label: "Pembuangan<br>Babel", date: "±586 SM" },
+            { label: "Pemulihan",        date: "±458 SM" }
+        ];
+
+        /* ============================================================
+           DATA STUDI — 12 TOKOH (dengan 4 pertanyaan masing-masing)
+           ============================================================ */
+        const studyData = [
+            /* ---------- 1. KALEB ---------- */
+            {
+                name: "Kaleb",
+                nickname: "Sang Pejuang Tanpa Kompromi",
+                period: "±1445–1400 SM",
+                eraIndex: 1,
+                locations: [
+                    { ancient: "Kadesh-Barnea", modern: "Ein el-Qudeirat, Semenanjung Sinai", country: "Mesir / Israel" },
+                    { ancient: "Hebron (Kiriat-Arba)", modern: "Al-Khalil / Hebron, Tepi Barat", country: "Palestina / Israel" },
+                    { ancient: "Gilgal", modern: "Dekat Yerikho, Lembah Yordan", country: "Tepi Barat / Israel" }
+                ],
+                objective: "Peserta PA belajar untuk memiliki 'roh yang berbeda' (keteguhan iman) di tengah mayoritas yang pesimis, dan tetap bersemangat melayani Tuhan tanpa memandang usia.",
+                background: "Sejarah ini dimulai sekitar tahun 1445 SM di Kadesh-Barnea (Bilangan 13-14), perbatasan Tanah Perjanjian. Bangsa Israel yang baru keluar dari Mesir dilanda ketakutan saat melihat raksasa Enak dan kota-kota berbenteng seperti Yerikho. Dari 12 pengintai, hanya Kaleb (dari suku Yehuda) dan Yosua yang percaya penuh pada janji Allah. Akibat ketidakpercayaan mayoritas, Israel dihukum mengembara 40 tahun. Barulah pada sekitar tahun 1400 SM, saat Kaleb berusia 85 tahun di Gilgal, ia menagih janjinya untuk merebut Hebron, wilayah pegunungan tersulit yang masih diduduki para raksasa.",
+                reading: "Bilangan 14:1-10, 20-24 & Yosua 14:6-15",
+                questions: [
+                    { q: "Apa yang membuat Kaleb memiliki pandangan yang berbeda dari kesepuluh pengintai lainnya?", hint: "Petunjuk: Perhatikan frasa 'roh yang lain' dan 'mengikut Aku dengan sepenuhnya' di Bilangan 14:24." },
+                    { q: "Pada usia 85 tahun, Kaleb justru meminta Hebron. Apa makna permintaan ini bagi iman kita saat ini?", hint: "Petunjuk: Baca Yosua 14:12. Hebron adalah wilayah orang Enak (raksasa) yang menjadi alasan 10 pengintai lain ketakutan 45 tahun sebelumnya." },
+                    { q: "Bagaimana kisah Kaleb menantang pandangan umum bahwa usia lanjut berarti berhenti melayani dan mencari zona nyaman? Sikap apa yang perlu kita teladani?", hint: "Petunjuk: Renungkan semangat Kaleb di usia 85 tahun. Bandingkan dengan budaya pensiun rohani yang sering terjadi di gereja." },
+                    { q: "Ibrani 3:12-19 mengutip peristiwa di Kadesh-Barnea sebagai peringatan. Apa inti peringatan tersebut, dan bagaimana kita bisa menjaga hati agar tidak mengeras karena ketidakpercayaan?", hint: "Petunjuk: Baca Ibrani 3:12-19. Perhatikan hubungan antara ketidakpercayaan, hati yang keras, dan kehilangan janji Tuhan." }
+                ],
+                reflection: "Kaleb mengajarkan bahwa iman yang sejati tidak ditentukan oleh pendapat mayoritas. Mayoritas belum tentu benar jika itu bertentangan dengan firman Tuhan. Di usia tua, ia tidak meminta zona nyaman untuk pensiun, melainkan meminta gunung yang paling sulit ditaklukkan karena integritas dan komitmennya tidak luntur oleh waktu (45 tahun). Ia memelihara antusiasme ilahinya di tengah generasi penggerutu.",
+                memoryVerse: "Tetapi hamba-Ku Kaleb, karena lain jiwa yang ada padanya dan ia mengikut Aku dengan sepenuhnya, akan Kubawa masuk ke negeri yang telah dimasukinya itu... (Bilangan 14:24a)",
+                action: "Identifikasi satu 'pegunungan/masalah besar' dalam hidup Anda saat ini. Alih-alih mengeluh bersama 'mayoritas', perkatakan janji Tuhan atas masalah tersebut dalam doa Anda setiap pagi minggu ini."
+            },
+
+            /* ---------- 2. GIDEON ---------- */
+            {
+                name: "Gideon",
+                nickname: "Pahlawan dari Tempat Tersembunyi",
+                period: "±1190 SM",
+                eraIndex: 2,
+                locations: [
+                    { ancient: "Ofra", modern: "Wilayah Manasye (lokasi tepat diperdebatkan)", country: "Israel" },
+                    { ancient: "Mata Air Harod", modern: "Ein Harod, Lembah Yizreel", country: "Israel" },
+                    { ancient: "Lembah Yizreel", modern: "Lembah Jezreel", country: "Israel" }
+                ],
+                objective: "Mengajarkan bahwa Tuhan memakai orang yang merasa lemah dan tidak layak, asalkan ia mau taat dan bersandar pada kekuatan Tuhan, bukan kekuatannya sendiri.",
+                background: "Kisah ini terjadi pada Zaman Hakim-hakim (sekitar 1190 SM). Saat itu, Israel sedang dijajah dengan kejam oleh bangsa Midian dan Amalek selama 7 tahun. Setiap kali Israel panen, musuh datang menghabiskan hasil bumi seperti belalang di Lembah Yizreel. Gideon (dari suku Manasye yang terkecil) dipanggil di kota Ofra saat ia sedang sembunyi-sembunyi mengirik gandum di tempat pemerasan anggur—sebuah tindakan yang menunjukkan keputusasaan dan ketakutan nasional saat itu.",
+                reading: "Hakim-hakim 6:11-16 & Hakim-hakim 7:1-7",
+                questions: [
+                    { q: "Bagaimana cara pandang Tuhan (Malaikat Tuhan) terhadap Gideon berbeda dengan cara pandang Gideon terhadap dirinya sendiri?", hint: "Petunjuk: Bandingkan sapaan di Hakim-hakim 6:12 dengan jawaban Gideon di 6:15." },
+                    { q: "Mengapa Tuhan menyuruh Gideon mengurangi jumlah pasukannya dari 32.000 menjadi hanya 300 orang saat berkemah di mata air Harod?", hint: "Petunjuk: Baca Hakim-hakim 7:2. Temukan alasan Tuhan terkait 'kemegahan diri' (kesombongan/kebanggaan manusiawi)." },
+                    { q: "Gideon meminta tanda melalui guntingan bulu domba. Apakah meminta tanda kepada Tuhan selalu salah? Bagaimana kita membedakan antara mencari guidance Tuhan dan mencobai Dia?", hint: "Petunjuk: Baca Hakim-hakim 6:36-40. Bandingkan dengan sikap Yesus yang menolak memberi tanda (Matius 12:39)." },
+                    { q: "Setelah kemenangan besar, Gideon membuat efod yang kemudian menjadi jerat bagi Israel. Apa pelajaran tentang bahaya menjadikan pengalaman rohani atau benda rohani sebagai berhala?", hint: "Petunjuk: Baca Hakim-hakim 8:24-27. Renungkan bagaimana niat baik bisa berubah menjadi penyembahan berhala jika tidak dijaga." }
+                ],
+                reflection: "Gideon dipenuhi rasa minder dan keraguan; ia bahkan meminta tanda (guntingan bulu domba) berulang kali. Namun Tuhan sangat sabar. Pengurangan pasukan yang ekstrem secara logika militer adalah taktik bunuh diri, namun secara rohani itu adalah cara ilahi menanggalkan kemandirian manusia. Tuhan sering kali mengurangi 'sumber daya' kita agar kemenangan murni dikreditkan kepada kemuliaan-Nya semata.",
+                memoryVerse: "Lalu berpalinglah TUHAN kepadanya dan berfirman: 'Pergilah dengan kekuatanmu ini dan selamatkanlah orang Israel dari cengkeraman orang Midian. Bukankah Aku mengutus engkau!' (Hakim-hakim 6:14)",
+                action: "Tuliskan kelemahan, masa lalu, atau keterbatasan yang sering membuat Anda minder melayani. Serahkan daftar itu dalam doa, dan katakan 'Tuhan, pakai keterbatasanku ini untuk menyatakan kemuliaan-Mu'."
+            },
+
+            /* ---------- 3. SIMSON ---------- */
+            {
+                name: "Simson",
+                nickname: "Sang Raksasa Berhati Rapuh",
+                period: "±1075 SM",
+                eraIndex: 2,
+                locations: [
+                    { ancient: "Zora & Esytaol", modern: "Tel Tzora & Tel Eshtaol, dekat Beit Shemesh", country: "Israel" },
+                    { ancient: "Lembah Sorek", modern: "Nahal Sorek", country: "Israel" },
+                    { ancient: "Gaza", modern: "Gaza", country: "Palestina / Israel" }
+                ],
+                objective: "Mengingatkan peserta PA tentang bahaya kompromi dengan dosa, dan bahwa karunia Tuhan yang besar menuntut penguasaan diri yang besar pula.",
+                background: "Terjadi di akhir zaman Hakim-hakim (sekitar 1075 SM), berpusat di wilayah Zora, Esytaol, hingga Gaza. Orang Filistin saat itu memiliki monopoli teknologi besi dan menguasai pesisir Kanaan, menjajah Israel selama 40 tahun. Simson diangkat Tuhan melalui nazar khusus (Nazir Allah) sejak lahir. Sayangnya, gaya hidup Simson adalah cerminan kondisi bangsanya saat itu: diberkati berlimpah, memiliki potensi supranatural, tetapi secara moral ceroboh dan senang berasimilasi dengan budaya serta ilah musuh.",
+                reading: "Hakim-hakim 16:4-21, 28-30",
+                questions: [
+                    { q: "Di manakah letak kelemahan utama karakter Simson yang pada akhirnya menghancurkan hidupnya?", hint: "Petunjuk: Perhatikan polanya di pasal 16. Bagaimana ia tidak bisa menetapkan batasan (boundary) emosional dengan Delila?" },
+                    { q: "Meskipun Simson gagal secara fatal, bagaimana Tuhan merespons doa dan pertobatan terakhirnya di kuil Dagon?", hint: "Petunjuk: Baca Hakim-hakim 16:28-30. Apa yang diajarkan hal ini mengenai kasih karunia Allah?" },
+                    { q: "Simson adalah seorang Nazir yang tidak boleh memotong rambut, minum anggur, atau menyentuh bangkai. Bagaimana pelanggaran bertahap terhadap komitmen ini menggambarkan proses kompromi yang membawa kehancuran?", hint: "Petunjuk: Baca Bilangan 6:1-8. Renungkan bagaimana kompromi kecil yang dibiarkan akan mengarah pada kehancuran besar." },
+                    { q: "Ibrani 11:32 mencantumkan Simson sebagai pahlawan iman. Bagaimana kita memahami hal ini mengingat kegagalan moralnya? Apa yang diajarkan tentang kasih karunia Allah dan tanggung jawab manusia?", hint: "Petunjuk: Baca Ibrani 11:32-34. Diskusikan perbedaan antara keselamatan oleh iman dan konsekuensi dosa dalam hidup." }
+                ],
+                reflection: "Kisah Simson sangat tragis. Ia adalah pria terkuat secara fisik, tetapi sangat lemah secara moral dan emosional. Ia bisa merobek mulut singa, tapi tak bisa mengendalikan hawa nafsunya. Kompromi kecil pada akhirnya membuat matanya dicungkil dan ia ditertawakan musuh. Namun, di ujung penderitaannya dalam kebutaan, Simson menemukan visi rohaninya kembali. Doanya dijawab, membuktikan bahwa Allah tidak pernah membuang umat-Nya yang bertobat tulus.",
+                memoryVerse: "Orang yang sabar melebihi seorang pahlawan, orang yang menguasai dirinya, melebihi orang yang merebut kota. (Amsal 16:32)",
+                action: "Buatlah batasan yang tegas (boundary) minggu ini terhadap satu area di mana Anda paling mudah tergoda untuk kompromi, entah itu tontonan, pergaulan, emosi, atau keuangan."
+            },
+
+            /* ---------- 4. RUT ---------- */
+            {
+                name: "Rut",
+                nickname: "Perempuan Asing Pembawa Kasih Setia",
+                period: "±1140 SM",
+                eraIndex: 2,
+                locations: [
+                    { ancient: "Moab", modern: "Karak & Madaba, Yordania", country: "Yordania" },
+                    { ancient: "Betlehem", modern: "Betlehem, Tepi Barat", country: "Palestina / Israel" },
+                    { ancient: "Ladang Boas", modern: "Wilayah Betlehem", country: "Palestina / Israel" }
+                ],
+                objective: "Memahami makna 'Hesed' (kasih setia yang tak bersyarat) dan bagaimana ketaatan yang sederhana berdampak pada rancangan keselamatan yang besar.",
+                background: "Berlatar pada era kelam Hakim-hakim (sekitar 1140 SM). Akibat kelaparan di Betlehem, keluarga Elimelekh dan Naomi bermigrasi ke dataran Moab (bangsa keturunan Lot yang sering memusuhi Israel). Di sana, Elimelekh dan kedua putranya meninggal. Di tengah kepahitan yang luar biasa, Naomi memutuskan kembali ke Yehuda. Rut, menantunya yang adalah perempuan Moab, menolak tradisinya sendiri dan memilih mengikatkan diri pada Naomi dan Allah Yahweh.",
+                reading: "Rut 1:1-18 & Rut 2:8-12",
+                questions: [
+                    { q: "Apa yang mendasari komitmen radikal Rut kepada Naomi, meskipun secara logika tetap tinggal di Moab menjanjikan masa depan lebih aman?", hint: "Petunjuk: Baca Rut 1:16-17. Perhatikan perpindahan penyembahan dari dewa-dewa Moab (Kamos) ke Allah Israel." },
+                    { q: "Bagaimana karakter Boas di ladang mencerminkan karakter Allah dalam bertindak sebagai 'Go'el' (Penebus)?", hint: "Petunjuk: Rut 2:8-12. Lihat bagaimana Boas melindungi, menyediakan makanan, dan mengangkat harkat orang yang marjinal." },
+                    { q: "Naomi meminta dirinya dipanggil Mara (pahit). Bagaimana Tuhan memakai Rut untuk memulihkan harapan Naomi? Apa yang dapat kita pelajari tentang mendampingi orang yang sedang pahit hati?", hint: "Petunjuk: Baca Rut 1:20-21 dan Rut 4:14-15. Perhatikan bagaimana kesetiaan Rut dan kelahiran Obed mengubah kepahitan Naomi." },
+                    { q: "Kitab Rut terjadi pada zaman Hakim-hakim yang chaotic, namun fokusnya pada kebaikan sehari-hari. Apa yang diajarkan tentang bagaimana Tuhan bekerja melalui hal-hal kecil dan orang-orang biasa?", hint: "Petunjuk: Renungkan bagaimana Tuhan memakai rutinitas memungut jelai untuk merajut garis keselamatan menuju Daud dan Yesus." }
+                ],
+                reflection: "Kisah Rut adalah demonstrasi indah tentang 'Hesed' (kasih sayang, kesetiaan yang aktif, dan belas kasihan). Kasih setia Rut kepada mertuanya dibalas oleh perkenanan Allah melalui perantaraan Boas. Melalui rutinitas sehari-hari yang terlihat sepele (memungut jelai), Allah merajut sejarah. Perempuan Moab yang marjinal ini dipulihkan dan namanya tercatat abadi sebagai nenek moyang Raja Daud dan Yesus Kristus.",
+                memoryVerse: "Tetapi kata Rut: 'Janganlah desak aku meninggalkan engkau dan pulang dengan tidak mengikuti engkau; sebab ke mana engkau pergi, ke situ jugalah aku pergi... bangsamulah bangsaku dan Allahmulah Allahku.' (Rut 1:16)",
+                action: "Tunjukkan 'Hesed' (kasih yang berbuat ekstra) minggu ini kepada satu orang yang sedang mengalami kepahitan, kehilangan, atau kesulitan hidup. Berikan bantuan praktis tanpa pamrih."
+            },
+
+            /* ---------- 5. ELIA ---------- */
+            {
+                name: "Elia",
+                nickname: "Sang Nabi Api Pemecah Kesunyian",
+                period: "±870 SM",
+                eraIndex: 4,
+                locations: [
+                    { ancient: "Tisbe, Gilead", modern: "Wilayah Yordania utara (lokasi tepat diperdebatkan)", country: "Yordania" },
+                    { ancient: "Gunung Karmel", modern: "Mount Carmel, Haifa", country: "Israel" },
+                    { ancient: "Bersyeba", modern: "Beersheba", country: "Israel" },
+                    { ancient: "Gunung Horeb (Sinai)", modern: "Gunung Sinai, Semenanjung Sinai", country: "Mesir" }
+                ],
+                objective: "Belajar berani berdiri bagi kebenaran di tengah budaya yang menolak Tuhan, dan belajar mengatasi kelelahan mental/depresi dengan cara rohani.",
+                background: "Terjadi di Kerajaan Israel Utara (sekitar 870 SM) di bawah pemerintahan Raja Ahab dan Ratu Izebel yang fasik. Izebel membawa kultus penyembahan Baal (dewa badai, kesuburan, pencipta hujan) dari Tirus dan secara sistematis membunuh nabi-nabi Yahweh. Elia (dari Tisbe, Gilead) menantang otoritas Baal langsung pada keahliannya: ia berdoa agar tidak turun hujan selama 3,5 tahun. Klimaksnya adalah duel rohani melawan 450 nabi Baal di Gunung Karmel.",
+                reading: "1 Raja-raja 18:36-39 & 1 Raja-raja 19:1-18",
+                questions: [
+                    { q: "Setelah kemenangan spektakuler di Karmel, mengapa Elia tiba-tiba menjadi ketakutan, melarikan diri ke padang gurun, dan meminta mati?", hint: "Petunjuk: 1 Raja-raja 19:1-4. Pertimbangkan ancaman Izebel yang spesifik dan kondisi kelelahan (burnout) fisik Elia." },
+                    { q: "Bagaimana cara Tuhan memulihkan Elia di Gunung Horeb (Sinai)?", hint: "Petunjuk: 1 Raja-raja 19:11-18. Apakah Tuhan memarahinya? Lewat medium apa Tuhan berbicara kepadanya?" },
+                    { q: "Mengapa pengalaman puncak rohani sering diikuti dengan kejatuhan atau kekosongan? Bagaimana kita dapat mempersiapkan diri menghadapi 'padang gurun' setelah 'gunung'?", hint: "Petunjuk: Renungkan pola dalam hidup Elia. Diskusikan pentingnya istirahat, komunitas, dan pola makan yang sehat untuk kesehatan rohani." },
+                    { q: "Tuhan tidak menampakkan diri dalam angin besar, gempa, atau api, melainkan dalam suara yang lembut. Apa artinya ini bagi cara kita mendengarkan Tuhan hari ini? Bagaimana melatih kepekaan terhadap suara-Nya?", hint: "Petunjuk: Baca 1 Raja-raja 19:11-13. Renungkan praktik doa kontemplatif, keheningan, dan membaca Firman dengan hati yang tenang." }
+                ],
+                reflection: "Depresi Elia sangat relevan bagi peserta PA masa kini. Setelah pencapaian besar, ia terkena *burnout* parah. Tuhan merespons bukan dengan khotbah keras, melainkan secara holistik: membiarkan ia tidur, memberinya roti dan air, lalu menemuinya bukan dalam angin tofan atau gempa bumi, melainkan dalam 'suara angin sepoi-sepoi basa' (keintiman). Tuhan juga memulihkannya dengan memberi teman sekerja (Elisa) dan menyadarkannya bahwa ia tidak sendirian (ada 7.000 orang lain).",
+                memoryVerse: "Jawabnya: 'Aku bekerja dengan cemburu bagaikan api untuk TUHAN, Allah semesta alam, karena orang Israel meninggalkan perjanjian-Mu...' (1 Raja-raja 19:10a)",
+                action: "Jika Anda sedang lelah, stres, atau merasa sendirian melayani, ambillah waktu untuk istirahat secara fisik. Matikan *gadget* Anda, pergilah ke tempat sepi, dan dengarkan suara Tuhan dalam keheningan doa."
+            },
+
+            /* ---------- 6. YOSAFAT ---------- */
+            {
+                name: "Yosafat",
+                nickname: "Sang Raja yang Memilih Pujian",
+                period: "±873–848 SM",
+                eraIndex: 4,
+                locations: [
+                    { ancient: "Yerusalem", modern: "Yerusalem", country: "Israel / Palestina" },
+                    { ancient: "Padang Gurun Tekoa", modern: "Tekoa, dekat Betlehem", country: "Tepi Barat" },
+                    { ancient: "Ein Gedi", modern: "Ein Gedi, tepi Laut Mati", country: "Israel" }
+                ],
+                objective: "Meneladani sikap mengandalkan Tuhan saat menghadapi krisis besar dan menjadikan pujian/penyembahan sebagai senjata peperangan rohani.",
+                background: "Yosafat adalah Raja ke-4 Kerajaan Yehuda (Selatan) yang memerintah sekitar 873–848 SM. Ia dikenal sebagai reformator yang setia kepada hukum Tuhan. Namun, kepemimpinannya diuji habis-habisan ketika koalisi besar militer dari Moab, Amon, dan Meunim (dari daerah Pegunungan Seir) datang mengepung dari seberang Laut Mati. Secara hitungan logis dan militer, Yehuda tidak punya peluang untuk menang di Padang Gurun Tekoa.",
+                reading: "2 Tawarikh 20:1-12, 20-22",
+                questions: [
+                    { q: "Apa inti dan pengakuan terdalam dari doa Yosafat di hadapan jemaah di Bait Suci saat menghadapi ancaman tersebut?", hint: "Petunjuk: Baca 2 Tawarikh 20:12. Perhatikan pengakuannya akan ketidakberdayaan dan fokus pandangannya." },
+                    { q: "Strategi militer apa yang dipakai Yosafat, yang secara manusia sangat tidak masuk akal dalam sebuah peperangan?", hint: "Petunjuk: Baca 2 Tawarikh 20:21-22. Siapa yang ditempatkan di barisan paling depan pasukan?" },
+                    { q: "Yosafat pernah bersekutu dengan Ahab, raja Israel yang jahat, dan hampir mati dalam pertempuran. Apa peringatan tentang hubungan yang tidak seimbang (unequally yoked) dengan orang yang tidak takut akan Tuhan?", hint: "Petunjuk: Baca 2 Tawarikh 18:1-3 dan 2 Tawarikh 19:2. Renungkan prinsip 2 Korintus 6:14." },
+                    { q: "Pujian ditempatkan di depan pasukan, dan Tuhan mengadakan penyergapan. Bagaimana ini menggambarkan pujian sebagai senjata rohani? Bagikan pengalaman ketika pujian mendahului kemenangan.", hint: "Petunjuk: Baca 2 Tawarikh 20:22. Renungkan bagaimana pujian mengalihkan fokus dari masalah kepada kedaulatan Tuhan." }
+                ],
+                reflection: "Yosafat mengajarkan bahwa kepemimpinan rohani dimulai dari kesadaran bahwa 'kita tidak berdaya'. Alih-alih merancang strategi logistik militer lebih dulu, ia mengadakan puasa nasional. Menempatkan pemuji-pemuji Tuhan berkostum kudus di garis depan pertempuran adalah demonstrasi iman yang spektakuler. Pujian bukanlah sekadar nyanyian; itu adalah deklarasi kedaulatan Allah di atas masalah yang menakutkan.",
+                memoryVerse: "'...Karena kami tidak mempunyai kekuatan untuk menghadapi laskar yang besar ini... kami tidak tahu apa yang harus kami lakukan, tetapi mata kami tertuju kepada-Mu.' (2 Tawarikh 20:12)",
+                action: "Saat Anda merasa terjepit oleh krisis atau masalah berat, sebelum mencari solusi manusia, putarlah lagu penyembahan dan naikkan syukur kepada Tuhan. Biarkan Dia berperang ganti Anda."
+            },
+
+            /* ---------- 7. NAAMAN ---------- */
+            {
+                name: "Naaman",
+                nickname: "Sang Panglima yang Belajar Tunduk",
+                period: "±850 SM",
+                eraIndex: 4,
+                locations: [
+                    { ancient: "Damsyik (Aram)", modern: "Damaskus", country: "Suriah" },
+                    { ancient: "Samaria", modern: "Sebastia, Tepi Barat", country: "Palestina / Israel" },
+                    { ancient: "Sungai Yordan", modern: "Sungai Jordan", country: "Israel / Yordania" }
+                ],
+                objective: "Belajar menanggalkan kesombongan, kedudukan, dan logika manusia untuk menerima mujizat kesembuhan dari Tuhan melalui ketaatan sederhana.",
+                background: "Kisah ini terjadi di zaman Kerajaan Israel dan Aram (Suriah) sekitar tahun 850 SM. Naaman adalah panglima tertinggi militer Raja Aram di Damsyik (Damaskus), seorang yang sangat dihormati namun menderita kusta kronis. Kusta saat itu adalah vonis mati dan isolasi sosial. Solusi kesembuhan tidak datang dari penasihat militer, melainkan dari seorang gadis kecil Israel yang menjadi tawanan perang, yang mengarahkannya kepada Nabi Elisa di Samaria.",
+                reading: "2 Raja-raja 5:1-15",
+                questions: [
+                    { q: "Mengapa Naaman awalnya begitu marah dan berniat pulang saat mendengar instruksi dari Nabi Elisa?", hint: "Petunjuk: Baca 2 Raja-raja 5:11-12. Perhatikan ekspektasi gengsi Naaman tentang 'cara' disembuhkan dan kebanggaannya pada sungai-sungai negerinya." },
+                    { q: "Peran siapa yang pada akhirnya menembus ego Naaman sehingga ia mau mengubah pikirannya dan menaati firman Tuhan?", hint: "Petunjuk: Baca 2 Raja-raja 5:13. Pelajaran apa yang kita dapat tentang mau mendengarkan nasihat orang 'bawahan'?" },
+                    { q: "Naaman membawa hadiah berlimpah, tetapi Elisa menolaknya. Mengapa kesembuhan (keselamatan) tidak bisa dibeli? Bagaimana ini menantang pandangan dunia yang transaksional tentang berkat Tuhan?", hint: "Petunjuk: Baca 2 Raja-raja 5:15-16. Renungkan Efesus 2:8-9 tentang kasih karunia sebagai pemberian cuma-cuma." },
+                    { q: "Naaman meminta dua pikulan tanah dari Israel untuk dibawa pulang ke Damsyik. Apa yang ini ungkapkan tentang pemahamannya akan kehadiran Tuhan? Apakah kita juga cenderung 'melokalkan' Tuhan?", hint: "Petunjuk: Baca 2 Raja-raja 5:17. Renungkan bagaimana Tuhan hadir di mana-mana, tidak terikat pada tempat atau benda tertentu." }
+                ],
+                reflection: "Mujizat Tuhan sering kali datang dalam kemasan yang menghancurkan gengsi dan logika kita. Naaman datang dengan harta berlimpah dan pasukan besar, berharap disambut bak pahlawan. Namun ia dibiarkan menemui kenyataan: di hadapan penyakit (dosa), ia sama dengan manusia biasa. Ia harus membuang jubah kesombongannya dan merendahkan diri masuk ke Sungai Yordan yang keruh. Ketaatan total pada instruksi yang sederhana itulah yang membawa pemulihan.",
+                memoryVerse: "Maka turunlah ia membenamkan dirinya tujuh kali dalam sungai Yordan, sesuai dengan perkataan abdi Allah itu. Lalu pulihlah tubuhnya kembali seperti tubuh seorang anak... (2 Raja-raja 5:14)",
+                action: "Adakah instruksi Firman Tuhan, aturan rohani, atau teguran sesama yang Anda abaikan karena merasa 'lebih tahu' atau gengsi? Mintalah kerendahan hati kepada Roh Kudus untuk taat dan melakukannya."
+            },
+
+            /* ---------- 8. YUNUS ---------- */
+            {
+                name: "Yunus",
+                nickname: "Sang Pelari yang Ditangkap Kasih",
+                period: "±782–753 SM",
+                eraIndex: 4,
+                locations: [
+                    { ancient: "Gat-Hefer", modern: "Mashhad, Galilea", country: "Israel" },
+                    { ancient: "Yafo", modern: "Jaffa / Tel Aviv", country: "Israel" },
+                    { ancient: "Tarsis", modern: "Tartessos, Spanyol selatan (kemungkinan)", country: "Spanyol" },
+                    { ancient: "Niniwe", modern: "Mosul", country: "Irak" }
+                ],
+                objective: "Mengerti bahwa panggilan Tuhan tidak bisa dihindari, dan belajar menyelami hati Tuhan yang mengasihi jiwa-jiwa yang terhilang, bahkan musuh kita sekalipun.",
+                background: "Yunus bernubuat di bawah pemerintahan Raja Yerobeam II (sekitar 782-753 SM). Niniwe adalah ibu kota Kekaisaran Asyur—bangsa pagan yang terkenal sangat sadis dalam menguliti dan menyiksa musuh-musuhnya, serta merupakan ancaman terbesar bagi Israel. Tuhan menyuruh Yunus ke Niniwe (timur), tetapi dengan semangat nasionalisme yang ekstrem, Yunus naik kapal dari Yafo lari ke Tarsis (ujung barat Spanyol kuno). Ia ingin Asyur hancur, bukan bertobat.",
+                reading: "Yunus 1:1-3 & Yunus 4:1-11",
+                questions: [
+                    { q: "Dari pengakuan Yunus sendiri di akhir cerita, apa alasan sebenarnya ia melarikan diri dari panggilan Tuhan di awal?", hint: "Petunjuk: Baca Yunus 4:2. Bukankah ia lari justru karena ia tahu persis karakter/sifat Allah?" },
+                    { q: "Bagaimana cara Tuhan membalas kemarahan Yunus dan mengoreksi cara pandangnya tentang penduduk Niniwe?", hint: "Petunjuk: Yunus 4:10-11. Bandingkan kepedulian Yunus pada sebatang pohon jarak dengan kepedulian Allah pada 120.000 manusia." },
+                    { q: "Para pelaut di kapal adalah orang kafir, namun mereka berdoa dan mempersembahkan korban kepada Yahweh setelah badai. Apa yang ini ungkapkan tentang bagaimana Tuhan dapat memakai ketidaktaatan kita untuk menyatakan diri-Nya kepada orang lain?", hint: "Petunjuk: Baca Yunus 1:14-16. Renungkan bagaimana bahkan dalam pelarian Yunus, Tuhan tetap bekerja." },
+                    { q: "Yesus menyebut bahwa orang Niniwe akan bangkit dan menghakimi generasi yang menolak-Nya. Apa implikasi dari pernyataan ini tentang tanggung jawab yang lebih besar bagi mereka yang telah menerima wahyu yang lebih besar?", hint: "Petunjuk: Baca Matius 12:41. Renungkan bagaimana respons kita terhadap Yesus menentukan kekekalan." }
+                ],
+                reflection: "Kisah Yunus bukan sekadar cerita mukjizat ikan besar. Ini adalah kisah tentang hati seorang aktivis agama yang sempit berhadapan dengan anugerah Allah yang luas. Yunus taat berkhotbah (pasal 3), tetapi hatinya memberontak ketika musuhnya diampuni. Ini teguran bagi gereja: kita seringkali rajin beribadah namun tidak memiliki belas kasihan kepada orang-orang dunia yang di luar pagar gereja. Keselamatan bukanlah monopoli kelompok kita.",
+                memoryVerse: "Dan Allah berfirman: 'Engkau sayang kepada pohon jarak itu... Bagaimana tidak Aku akan sayang kepada Niniwe, kota yang besar itu...?' (Yunus 4:10-11)",
+                action: "Doakan secara spesifik satu orang, kelompok, atau tokoh yang paling sulit Anda kasihi atau maafkan. Mintalah agar pandangan Anda terhadap mereka diselaraskan dengan kacamata belas kasihan Bapa."
+            },
+
+            /* ---------- 9. YOSIA ---------- */
+            {
+                name: "Yosia",
+                nickname: "Sang Reformator Belia",
+                period: "640–609 SM",
+                eraIndex: 4,
+                locations: [
+                    { ancient: "Yerusalem", modern: "Yerusalem", country: "Israel / Palestina" },
+                    { ancient: "Bait Suci Salomo", modern: "Temple Mount, Yerusalem", country: "Israel / Palestina" },
+                    { ancient: "Betel", modern: "Beitin, Tepi Barat", country: "Tepi Barat" }
+                ],
+                objective: "Pentingnya menjadikan Firman Tuhan sebagai standar mutlak dalam hidup, yang membuahkan pertobatan sejati dan reformasi/perubahan kebiasaan secara radikal.",
+                background: "Yosia diangkat menjadi Raja Yehuda pada usia 8 tahun (memerintah 640-609 SM). Ia mewarisi negara dengan kerusakan moral dan spiritual yang parah akibat kakeknya (Manasye) dan ayahnya (Amon). Pada tahun 622 SM (tahun ke-18 pemerintahannya), saat memerintahkan pembersihan Bait Suci Salomo yang terbengkalai, Imam Besar Hilkia tanpa sengaja menemukan gulungan Kitab Taurat (kemungkinan besar kitab Ulangan) yang selama ini diabaikan oleh bangsanya.",
+                reading: "2 Raja-raja 22:8-13 & 2 Raja-raja 23:1-3",
+                questions: [
+                    { q: "Apa reaksi langsung Raja Yosia ketika gulungan Kitab Taurat itu dibacakan di hadapannya?", hint: "Petunjuk: Baca 2 Raja-raja 22:11-13. Apa makna kultural dari 'mengoyakkan (merobek) pakaiannya' saat itu?" },
+                    { q: "Langkah praktis dan komunal apa yang Yosia lakukan setelah menyadari murka Tuhan sedang menyala atas bangsanya?", hint: "Petunjuk: Baca 2 Raja-raja 23:1-3. Perhatikan apa yang ia lakukan bersama seluruh rakyat terkait perjanjian dengan Tuhan." },
+                    { q: "Yosia menjadi raja pada usia 8 tahun dan mulai mencari Tuhan pada usia 16 tahun. Bagaimana kisahnya menantang ekspektasi kita tentang usia muda dan kepemimpinan rohani?", hint: "Petunjuk: Baca 2 Tawarikh 34:1-3. Renungkan bagaimana Tuhan memakai orang muda yang setia." },
+                    { q: "Yosia mati dalam pertempuran melawan Firaun Neko setelah ia tidak mendengarkan peringatan Tuhan melalui Neko. Apa pelajaran tentang menyelesaikan hidup dengan baik dan bahaya menganggap diri benar setelah sukses besar?", hint: "Petunjuk: Baca 2 Tawarikh 35:20-24. Renungkan pentingnya kerendahan hati dan ketaatan sampai akhir." }
+                ],
+                reflection: "Reaksi Yosia sangat bertolak belakang dengan raja-raja pendahulunya. Ia tidak defensif atau mencari kambing hitam. Saat menyadari firman Tuhan dilanggar, ia mengambil tanggung jawab penuh, merendahkan diri, dan melakukan reformasi radikal secara nasional (menghancurkan kuil pelacuran bakti, patung berhala, dan merayakan Paskah). Mendengar Firman tidak cukup hanya dianggukkan, harus diikuti tindakan tegas membuang 'berhala' dalam hidup kita.",
+                memoryVerse: "Sebab karena engkau menyesal dan engkau merendahkan diri di hadapan TUHAN pada waktu engkau mendengar firman-Ku... maka Akupun telah mendengarnya, demikianlah firman TUHAN. (2 Raja-raja 22:19)",
+                action: "Lakukan 'audit rohani': Singkirkan 'berhala-berhala modern' yang menyita waktu Anda dari Tuhan (seperti kecanduan media sosial, hobi yang berlebihan, atau kebiasaan buruk) minggu ini."
+            },
+
+            /* ---------- 10. DANIEL ---------- */
+            {
+                name: "Daniel",
+                nickname: "Sang Pendoa di Tengah Singa",
+                period: "±605 SM",
+                eraIndex: 5,
+                locations: [
+                    { ancient: "Yerusalem", modern: "Yerusalem", country: "Israel / Palestina" },
+                    { ancient: "Babel", modern: "Dekat Hillah, Irak", country: "Irak" },
+                    { ancient: "Susan (Susa)", modern: "Shush, Iran", country: "Iran" }
+                ],
+                objective: "Memperkuat komitmen integritas di tempat kerja atau pergaulan (sistem dunia) dan mempertahankan kehidupan doa yang tak dapat dikompromikan.",
+                background: "Tahun 605 SM, Kekaisaran Babel di bawah Nebukadnezar menaklukkan Yerusalem dan membawa pemuda-pemuda bangsawan cerdas, termasuk Daniel, ke pengasingan di Babel. Selama 70 tahun hidupnya di sana, Daniel menghadapi asimilasi budaya ekstrem: namanya diganti, didoktrin ilmu sihir Babel, dan dilayani kemewahan. Hebatnya, Daniel mampu bertahan memegang jabatan tinggi di bawah tiga rezim (Nebukadnezar, Belsyazar dari Babel, hingga Darius dari Medo-Persia) tanpa kehilangan identitas imannya.",
+                reading: "Daniel 1:8-17 & Daniel 6:1-11, 16-23",
+                questions: [
+                    { q: "Di awal kedatangannya sebagai remaja di Babel, keputusan kecil namun fundamental apa yang diambil Daniel?", hint: "Petunjuk: Baca Daniel 1:8. Mengapa soal menyantap makanan dari meja raja menjadi persoalan prinsipil baginya?" },
+                    { q: "Ketika usianya sudah tua dan dilarang berdoa kepada siapa pun selain Raja Darius, apa respons Daniel?", hint: "Petunjuk: Baca Daniel 6:11. Apakah ia menyembunyikan doanya, berdebat secara politik, atau tetap konsisten?" },
+                    { q: "Daniel dan teman-temannya menghadapi gua singa dan perapian yang menyala. Apa 'gua singa' atau 'perapian' yang dihadapi orang Kristen masa kini? Bagaimana kita dapat berdiri teguh?", hint: "Petunjuk: Baca Daniel 3:16-18 dan Daniel 6:10. Renungkan komitmen mereka untuk tidak menyembah berhala meskipun nyawa taruhannya." },
+                    { q: "Daniel berdoa tiga kali sehari dengan jendela terbuka ke arah Yerusalem. Apa yang diajarkan tentang disiplin doa dan kesaksian publik? Bagaimana menyeimbangkan doa pribadi dan kesaksian di depan umum?", hint: "Petunjuk: Baca Daniel 6:10. Renungkan bagaimana doa Daniel bukan untuk pamer, tetapi sudah menjadi kebiasaan yang tak tergoyahkan." }
+                ],
+                reflection: "Kekuatan Daniel di ruang publik lahir dari kesetiaannya di ruang privat (doa pribadi). Ia membuktikan bahwa kita bisa sukses di 'dunia sekuler' (menjadi perdana menteri) tanpa harus ikut arus kelicikannya. Musuh-musuh politiknya tak dapat menemukan kesalahan korupsi pada dirinya, sehingga mereka harus menyerangnya melalui ketaatan agamanya. Daniel rela kehilangan segalanya—bahkan nyawanya di gua singa—daripada mengorbankan waktu doanya bersama Tuhan.",
+                memoryVerse: "Daniel berketetapan untuk tidak menajiskan dirinya dengan santapan raja dan dengan anggur yang biasa diminum raja... (Daniel 1:8a)",
+                action: "Disiplinkan diri untuk menetapkan waktu doa yang spesifik setiap hari (misal: bangun pagi, istirahat siang, atau malam hari). Jangan izinkan kesibukan pekerjaan merebut waktu intim tersebut."
+            },
+
+            /* ---------- 11. EZRA ---------- */
+            {
+                name: "Ezra",
+                nickname: "Sang Pembangun Firman",
+                period: "±458 SM",
+                eraIndex: 6,
+                locations: [
+                    { ancient: "Babel", modern: "Irak modern", country: "Irak" },
+                    { ancient: "Yerusalem", modern: "Yerusalem", country: "Israel / Palestina" },
+                    { ancient: "Ahava", modern: "Lokasi diperdebatkan, dekat Sungai Ahava", country: "Irak / Suriah" }
+                ],
+                objective: "Membangun kecintaan mendalam pada studi Alkitab, dan pentingnya menyelaraskan hidup dengan kebenaran yang dipelajari sebelum mulai mengajarkannya.",
+                background: "Sekitar tahun 458 SM, Ezra—seorang imam keturunan Harun dan ahli Taurat—memimpin gelombang kedua kepulangan bangsa Israel dari pembuangan Babel ke Yerusalem, berbekal surat mandat dari Raja Artahsasta I (Persia). Jika gelombang pertama (oleh Zerubabel) fokus membangun fisik Bait Suci, tugas Ezra jauh lebih berat: membangun kembali infrastruktur moral dan rohani bangsa yang telah lupa pada Taurat Tuhan dan tercemar kawin campur massal dengan bangsa-bangsa pagan penyembah berhala.",
+                reading: "Ezra 7:6-10 & Ezra 9:1-6",
+                questions: [
+                    { q: "Berdasarkan Ezra 7:10, apa tiga komitmen/sikap hati yang membuat Ezra dipakai Tuhan dengan begitu luar biasa?", hint: "Petunjuk: Temukan tiga kata kerja berurutan dalam ayat tersebut. Mengapa urutan ketiganya sangat penting?" },
+                    { q: "Bagaimana sikap Ezra ketika mengetahui bangsanya, bahkan para pemuka agama, melakukan dosa kawin campur?", hint: "Petunjuk: Baca Ezra 9:3-6. Perhatikan posisi doanya, apakah ia menyalahkan mereka atau mengidentifikasikan dirinya bersama umat?" },
+                    { q: "Ezra adalah seorang pengajar, tetapi ia terlebih dahulu menjadi pelaku Firman. Bagaimana kita dapat memastikan bahwa hidup kita konsisten dengan apa yang kita ajarkan? Apa peran akuntabilitas?", hint: "Petunjuk: Baca Yakobus 1:22-25. Renungkan pentingnya memiliki mentor rohani atau kelompok kecil yang saling menegur." },
+                    { q: "Ezra merasa malu meminta pengawalan militer kepada raja karena ia telah bersaksi tentang perlindungan Tuhan. Pernahkah Anda mengalami situasi di mana kesaksian Anda membatasi pilihan 'aman' yang dunia tawarkan? Bagaimana Anda menyikapinya?", hint: "Petunjuk: Baca Ezra 8:21-23. Renungkan ketegangan antara iman dan tindakan praktis yang bijak." }
+                ],
+                reflection: "Rahasia dampak besar pelayanan Ezra ada pada urutannya: Meneliti -> Melakukan -> Mengajar. Banyak kekristenan modern langsung melompat ingin mengajar atau menasihati, tanpa terlebih dahulu menghidupi firman tersebut secara pribadi. Ezra membawa kebangunan rohani (*revival*) yang diwarnai air mata pertobatan massal karena karakternya yang otentik. Doa syafaatnya penuh empati; ia menangisi dosa jemaatnya seolah itu dosanya sendiri.",
+                memoryVerse: "Sebab Ezra telah bertekad untuk meneliti Taurat TUHAN dan melakukannya serta mengajar ketetapan dan peraturan di antara orang Israel. (Ezra 7:10)",
+                action: "Pilih satu kebenaran Firman Tuhan yang sudah Anda ketahui teorinya namun belum sering Anda lakukan. Fokuslah untuk mempraktikkannya secara nyata minggu ini sebelum membagikannya ke orang lain."
+            },
+
+            /* ---------- 12. NEHEMIA ---------- */
+            {
+                name: "Nehemia",
+                nickname: "Sang Pembangun Tembok Pengharapan",
+                period: "±445 SM",
+                eraIndex: 6,
+                locations: [
+                    { ancient: "Susan (Susa)", modern: "Shush, Iran", country: "Iran" },
+                    { ancient: "Yerusalem", modern: "Yerusalem", country: "Israel / Palestina" },
+                    { ancient: "Tembok Yerusalem", modern: "Kota Lama Yerusalem", country: "Israel / Palestina" }
+                ],
+                objective: "Mengajarkan kepemimpinan praktis, pentingnya doa sebelum bertindak, kolaborasi kerja keras, dan cara menghadapi intimidasi musuh rohani maupun fisik.",
+                background: "Terjadi sekitar tahun 445 SM. Nehemia bukanlah seorang nabi atau imam; ia adalah orang awam, seorang juru minuman di istana Raja Artahsasta I di Susan (Persia). Ini adalah posisi elit berkepercayaan tinggi. Namun saat mendengar bahwa tembok Yerusalem masih menjadi puing-puing (membuat umat tanpa perlindungan dan diejek bangsa sekitar), hatinya hancur. Ia meninggalkan kemewahan Persia untuk memimpin proyek rekonstruksi besar-besaran di tengah ancaman sabotase militer dari Sanbalat, Tobia, dan Gesyem.",
+                reading: "Nehemia 1:1-4 & Nehemia 4:1-9, 15-18",
+                questions: [
+                    { q: "Sebelum Nehemia bertindak dan mengajukan proposal proyeknya kepada Raja Artahsasta, fondasi apa yang ia bangun terlebih dahulu?", hint: "Petunjuk: Baca Nehemia 1:4 dan bandingkan dengan Nehemia 2:4. Apa peran doa, tangisan, dan puasa dalam rencananya?" },
+                    { q: "Bagaimana strategi praktis Nehemia dalam menghadapi ancaman serangan bersenjata dari musuh saat membangun tembok?", hint: "Petunjuk: Baca Nehemia 4:16-18. Perhatikan keseimbangan luar biasa antara berdoa dan berjaga-jaga (bekerja dengan alat sekaligus bersenjata)." },
+                    { q: "Nehemia memeriksa tembok pada malam hari dan tidak memberitahukan rencananya kepada siapa pun. Apa yang diajarkan tentang pentingnya waktu dan diskresi dalam kepemimpinan?", hint: "Petunjuk: Baca Nehemia 2:11-16. Renungkan bagaimana pemimpin yang bijak tahu kapan harus berbicara dan kapan harus bertindak." },
+                    { q: "Orang-orang bekerja dengan satu tangan memegang alat dan tangan lain memegang senjata. Bagaimana prinsip ini diterapkan dalam peperangan rohani kita sehari-hari?", hint: "Petunjuk: Baca Nehemia 4:17-18. Renungkan keseimbangan antara doa (bersandar pada Tuhan) dan usaha (bekerja dengan tekun)." }
+                ],
+                reflection: "Nehemia adalah arketipe pemimpin rohani yang komprehensif. Ia menggabungkan doa syafaat yang intens dengan perencanaan manajerial yang jenius. Ia bersandar mutlak pada Tuhan ('berdoalah kami kepada Allah kami'), tapi tidak diam saja ('kami mengadakan penjagaan siang dan malam'). Konsep pedang di satu tangan dan alat kerja di tangan lain mengajarkan kita bahwa iman tanpa perbuatan/persiapan yang rasional adalah mati.",
+                memoryVerse: "Maka aku menjawab mereka, kataku: 'Allah semesta langit, Dialah yang membuat kami berhasil! Kami, hamba-hamba-Nya, akan bersiap dan membangun...' (Nehemia 2:20a)",
+                action: "Apakah ada 'tembok' yang runtuh di hidup Anda atau lingkungan gereja/komunitas? Jangan hanya mengkritiknya; ambil inisiatif doa sungguh-sungguh, lalu tawarkan satu solusi praktis mulai dari diri sendiri."
+            }
+        ];
+
+        /* ============================================================
+           STATE & ELEMEN
+           ============================================================ */
+        let currentIndex = 0;
+
+        const mainContent = document.getElementById('mainContent');
+        const menuList = document.getElementById('menuList');
+        const progressBar = document.getElementById('progressBar');
+        const drawer = document.getElementById('drawer');
+        const overlay = document.getElementById('overlay');
+
+        /* ============================================================
+           INISIALISASI
+           ============================================================ */
+        function init() {
+            studyData.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `Pertemuan ${index + 1}: ${item.name}`;
+                li.onclick = () => loadContent(index);
+                menuList.appendChild(li);
+            });
+            loadContent(0);
+        }
+
+        /* ============================================================
+           RENDER TIMELINE
+           ============================================================ */
+        function renderTimeline(eraIndex) {
+            let nodesHtml = '';
+            ERAS.forEach((era, i) => {
+                const activeClass = (i === eraIndex) ? 'active' : '';
+                nodesHtml += `
+                    <div class="tl-node ${activeClass}">
+                        <div class="tl-dot"></div>
+                        <div class="tl-label">${era.label}</div>
+                        <div class="tl-date">${era.date}</div>
+                    </div>
+                `;
+            });
+            return nodesHtml;
+        }
+
+        /* ============================================================
+           RENDER LOCATIONS
+           ============================================================ */
+        function renderLocations(locations) {
+            let html = '';
+            locations.forEach(loc => {
+                html += `
+                    <div class="location-card">
+                        <div class="loc-ancient">${loc.ancient}</div>
+                        <div class="loc-arrow">▼</div>
+                        <div class="loc-modern">${loc.modern}</div>
+                        <div class="loc-country">${loc.country}</div>
+                    </div>
+                `;
+            });
+            return html;
+        }
+
+        /* ============================================================
+           LOAD CONTENT
+           ============================================================ */
+        function loadContent(index) {
+            currentIndex = index;
+            const data = studyData[index];
+
+            /* Progress Bar */
+            const progress = ((index + 1) / studyData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            /* Menu Styling */
+            const menuItems = menuList.getElementsByTagName('li');
+            for (let i = 0; i < menuItems.length; i++) {
+                menuItems[i].classList.remove('active');
+            }
+            if (menuItems[index]) menuItems[index].classList.add('active');
+
+            /* Questions HTML */
+            let questionsHtml = '';
+            data.questions.forEach((q, i) => {
+                questionsHtml += `
+                    <div class="question-box">
+                        <p><strong>${i + 1}.</strong> ${q.q}</p>
+                        <span class="hint">${q.hint}</span>
+                    </div>
+                `;
+            });
+
+            /* Timeline HTML */
+            const timelineHtml = renderTimeline(data.eraIndex);
+            const locationsHtml = renderLocations(data.locations);
+
+            /* Main Content */
+            mainContent.innerHTML = `
+                <div class="hero fade-in">
+                    <h1>Pertemuan ${index + 1}: ${data.name}</h1>
+                    <div class="julukan">"${data.nickname}"</div>
+                </div>
+
+                <div class="section-card fade-in">
+                    <h2>Tujuan</h2>
+                    <p>${data.objective}</p>
+                </div>
+
+                <div class="section-card fade-in">
+                    <h2>Latar Belakang Kitab & Historis</h2>
+                    <p>${data.background}</p>
+                </div>
+
+                <div class="timeline-section fade-in">
+                    <div class="timeline-header">
+                        <h2>Timeline &amp; Lokasi Geografis</h2>
+                        <span class="period-badge">${data.period}</span>
+                    </div>
+                    <div class="timeline-scroll">
+                        <div class="timeline-track">
+                            ${timelineHtml}
+                        </div>
+                    </div>
+                    <div class="location-grid">
+                        ${locationsHtml}
+                    </div>
+                </div>
+
+                <div class="reading-box fade-in">
+                    <p><strong>📖 Petunjuk Pembacaan:</strong> Sebelum memulai penelaahan, mintalah peserta/anggota sel untuk secara bergiliran membaca bagian Alkitab berikut:<br>
+                    <strong>${data.reading}</strong></p>
+                </div>
+
+                <div class="section-card fade-in">
+                    <h2>Pertanyaan Penelaahan</h2>
+                    ${questionsHtml}
+                </div>
+
+                <div class="section-card fade-in">
+                    <h2>Ringkasan & Refleksi</h2>
+                    <p>${data.reflection}</p>
+                </div>
+
+                <div class="memory-verse fade-in">
+                    "${data.memoryVerse}"
+                </div>
+
+                <div class="section-card action-step fade-in">
+                    <h2>Langkah Tindakan</h2>
+                    <p>${data.action}</p>
+                </div>
+
+                <div class="nav-buttons fade-in">
+                    <button class="btn" onclick="prevMeeting()" ${index === 0 ? 'disabled' : ''}>← Sebelumnya</button>
+                    <button class="btn" onclick="nextMeeting()" ${index === studyData.length - 1 ? 'disabled' : ''}>Selanjutnya →</button>
+                </div>
+            `;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            /* Tutup drawer di mobile */
+            if (window.innerWidth < 768) {
+                drawer.classList.remove('open');
+                overlay.classList.remove('active');
+            }
+        }
+
+        /* ============================================================
+           NAVIGASI
+           ============================================================ */
+        function toggleDrawer() {
+            drawer.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function nextMeeting() {
+            if (currentIndex < studyData.length - 1) loadContent(currentIndex + 1);
+        }
+
+        function prevMeeting() {
+            if (currentIndex > 0) loadContent(currentIndex - 1);
+        }
+
+        /* ============================================================
+           START
+           ============================================================ */
+        window.onload = init;
+    </script>
+</body>
+</html>
